@@ -1,0 +1,12 @@
+appId: tomato.gg
+productName: Tomato.gg
+copyright: Copyright © 2018 Goldflag
+directories:
+  output: dist
+  buildResources: resources
+files:
+  - from: .
+    filter:
+      - package.json
+      - app
+publish: null
