@@ -1,4 +1,4 @@
-import electron, { app, ipcMain } from "electron";
+import electron, { app, ipcMain, Menu } from "electron";
 import serve from "electron-serve";
 import path from "path";
 import { setupRevUtils } from "rev-utils";
@@ -25,7 +25,15 @@ if (isProd) {
     },
   });
 
-  await mainWindow.loadURL("https://tomato.gg");
+  mainWindow.removeMenu();
+
+  mainWindow.loadURL("https://tomato.gg");
+
+  mainWindow.setTitle("Tomato.gg");
+
+  mainWindow.on("page-title-updated", (event) => {
+    event.preventDefault();
+  });
 
   // if (isProd) {
   //   await mainWindow.loadURL('app://./home')
