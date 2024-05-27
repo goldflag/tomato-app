@@ -25,8 +25,6 @@ if (isProd) {
     },
   });
 
-  mainWindow.removeMenu();
-
   mainWindow.loadURL("https://tomato.gg");
 
   mainWindow.setTitle("Tomato.gg");
@@ -34,6 +32,35 @@ if (isProd) {
   mainWindow.on("page-title-updated", (event) => {
     event.preventDefault();
   });
+
+  // Define the menu template
+  const menuTemplate = [
+    {
+      label: "View",
+      submenu: [
+        {
+          label: "Reload",
+          accelerator: "CmdOrCtrl+R",
+          click() {
+            mainWindow.reload();
+          },
+        },
+        {
+          label: "Toggle Developer Tools",
+          accelerator: "CmdOrCtrl+Shift+I",
+          click() {
+            mainWindow.webContents.toggleDevTools();
+          },
+        },
+      ],
+    },
+  ];
+
+  // Set the application menu
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+
+  mainWindow.setMenuBarVisibility(false);
 
   // if (isProd) {
   //   await mainWindow.loadURL('app://./home')
